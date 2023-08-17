@@ -19,9 +19,9 @@ const TableSkeleton = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[1, 2, 3, 4, 5].map(() => {
+          {[1, 2, 3, 4, 5].map((key) => {
             return (
-              <TableRow className="cursor-pointer">
+              <TableRow className="cursor-pointer" key={key}>
                 <TableCell>
                   <Skeleton className="h-4 w-[40vw]" />
                 </TableCell>

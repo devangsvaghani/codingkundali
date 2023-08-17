@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { redirect, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const login = () => {
+const Login = () => {
   
   const searchParmas = useSearchParams();
   let search = searchParmas.get("callbackUrl");
@@ -18,13 +18,7 @@ const login = () => {
     redirect(search);
   }
 
-  const handleClick = () => {
-    console.log("clicked");
-    signIn("google");
-    console.log(search);
-    redirect(search);
-  }
-
+  
   return (
     <div className='h-[90vh]'>
       <div className="flex w-full h-full justify-center items-center">
@@ -42,4 +36,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login
