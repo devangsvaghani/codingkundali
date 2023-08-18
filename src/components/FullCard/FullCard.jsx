@@ -1,4 +1,4 @@
-import axios from "axios";
+import { cookies } from "next/headers";
 import {
   Card,
   CardContent,
@@ -56,6 +56,9 @@ const fetchData = async ({ leetcode, codingninjas, geeksforgeeks }) => {
 };
 
 const FullCard = async ({ username }) => {
+
+  const cookieStore = cookies();
+  const theme = cookieStore.get("theme")
 
   const user = await fetchUserf(username);
 
