@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation"
 
 const Profile = () => {
   return (
