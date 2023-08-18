@@ -15,15 +15,14 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { redirect } from "next/navigation";
+import { fetchUser } from "@/utils/user/fetchUser";
+import { fetchLeetcodeData } from "@/utils/usersData/fetchLeetcodeData";
+import { fetchCodingNinjasData } from "@/utils/usersData/fetchCodingNinjasData";
+import { fetchGfgData } from "@/utils/usersData/fetchGfgData";
 
-const fetchUser = async (leetcode) => {
+const fetchUserf = async (leetcode) => {
   try {
-    const user = await axios.post(
-      `${process.env.DOMAIN_URL}/api/user/fetchUser`,
-      {
-        leetcode: leetcode,
-      }
-    );
+    const user = await fetchUser(leetcode);
 
     return user;
   } catch (e) {
@@ -33,40 +32,21 @@ const fetchUser = async (leetcode) => {
 
 const fetchData = async ({ leetcode, codingninjas, geeksforgeeks }) => {
   // fetch data for leetcode
-  const leetcodeRes = await axios.post(
-    `${process.env.DOMAIN_URL}/api/info/leetcode`,
-    {
-      username: leetcode,
-    }
-  );
-
-  
+  const leetcodeRes = await fetchLeetcodeData(leetcode);
 
   // fetch data for codingninjas
-  const codingninjasRes = await axios.post(
-    `${process.env.DOMAIN_URL}/api/info/codingninjas`,
-    {
-      username: codingninjas,
-    }
-  );
-
-  
+  const codingninjasRes = await fetchCodingNinjasData(codingninjas);
 
   // fetch data for geeksforgeeks
-  const gfgRes = await axios.post(
-    `${process.env.DOMAIN_URL}/api/info/geeksforgeeks`,
-    {
-      username: geeksforgeeks,
-    }
-  );
+  const gfgRes = await fetchGfgData(geeksforgeeks);
 
-  if(leetcodeRes.data.data === null || codingninjasRes.data.data === null || gfgRes.data.data === null){
+  if(leetcodeRes=== null || codingninjasRes === null || gfgRes === null){
     redirect("/");
   }
-
-  const leetcodeData = leetcodeRes.data.data.acSubmissionNum;
-  const codingninjasData = codingninjasRes.data.data.submission_stats;
-  const gfgData = gfgRes.data.data;
+  
+  const leetcodeData = leetcodeRes.acSubmissionNum;
+  const codingninjasData = codingninjasRes.submission_stats;
+  const gfgData = gfgRes;
 
   return {
     leetcodeData,
@@ -77,10 +57,9 @@ const fetchData = async ({ leetcode, codingninjas, geeksforgeeks }) => {
 
 const FullCard = async ({ username }) => {
 
-  const res = await fetchUser(username);
+  const user = await fetchUserf(username);
 
-  const { name, email, avatar, year, leetcode, codingninjas, geeksforgeeks } =
-    res.data.user;
+  const { name, email, avatar, year, leetcode, codingninjas, geeksforgeeks } = user;
 
   const data = await fetchData({ leetcode, codingninjas, geeksforgeeks });
 

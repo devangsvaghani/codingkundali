@@ -5,7 +5,7 @@ import { TableCell, TableRow } from "../ui/table";
 import Loader from "../Loader/Loader";
 import { useState } from "react";
 
-const UserRow = ({user}) => {
+const UserRow = ({name, year, leetcode}) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const UserRow = ({user}) => {
 
   const clickHandler = () => {
     setLoading(true);
-    router.push(`/profile/${user.leetcode}`);
+    router.push(`/profile/${leetcode}`);
   };
 
   return (
@@ -21,8 +21,8 @@ const UserRow = ({user}) => {
       className="cursor-pointer relative"
       onClick={clickHandler}
     >
-      <TableCell>{loading ? <Loader /> : user.name}</TableCell>
-      {loading ? "" : <TableCell>{user.year}</TableCell>}
+      <TableCell>{loading ? <Loader /> : name}</TableCell>
+      {loading ? "" : <TableCell>{year}</TableCell>}
     </TableRow>
   );
 };

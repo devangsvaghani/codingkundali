@@ -1,3 +1,4 @@
+import connect from "@/config/database";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
@@ -17,7 +18,7 @@ export async function POST(req) {
         }
       );
     }
-
+    await connect();
     const userExist = await User.findOne({ email: email });
 
     if (!userExist) {

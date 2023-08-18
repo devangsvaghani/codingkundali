@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   Table,
   TableBody,
@@ -7,11 +6,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import UserRow from "./UserRow";
+import { fetchUsers } from "@/utils/user/fetchUsers";
 
 const UserTable = async () => {
-  const res = await axios.post(`${process.env.DOMAIN_URL}/api/user/fetchUsers`);
-
-  const array = res.data.users;
+  const array = await fetchUsers();
+  
   return (
     <div className="w-full mt-5 flex flex-col justify-center">
       <Table className="w-full md:w-3/4 mx-auto md:text-lg">
@@ -22,9 +21,9 @@ const UserTable = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {array.map((user) => {
+          {array && array.map((user, key) => {
             return (
-              <UserRow user={user} key={user._id}/>
+              <UserRow name={user.name} year={user.year} leetcode={user.leetcode} key={key}/>
             );
           })}
         </TableBody>

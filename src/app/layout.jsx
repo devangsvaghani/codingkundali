@@ -3,9 +3,8 @@ import AuthProvider from "@/providers/AuthProvider";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { Toaster } from "@/components/ui/toaster"
+import connect from "@/config/database";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,18 +15,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <AuthProvider>
           <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          {/* <ThemeSwitcher /> */}
             <main className="w-screen h-screen overflow-x-hidden overflow-y-auto">
               <Navbar />
               {children}
               <Footer />
               <Toaster />
             </main>
-        </ThemeProvider>
           </body>
       </AuthProvider>
     </html>

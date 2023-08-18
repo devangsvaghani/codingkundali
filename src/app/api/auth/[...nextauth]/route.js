@@ -1,4 +1,5 @@
-import axios from "axios";
+import User from "@/models/User";
+import { connect } from "mongoose";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -14,28 +15,22 @@ export const authOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "google") {
         const { name, email, image } = user;
-      
-        try{
-          const userExist = await axios.post(
-            `${process.env.DOMAIN_URL}/api/user/loginUser`,
-            {
-              email: email,
-              image: image,
-            }
-          );
 
-          if (!userExist || userExist.data.success === false) {
+        try {
+          await connect();
+          const user = await User.findOne({ email: email });
+
+          if (!user) {
             return false;
           }
-          
+
+          user.avatar = image;
+          await user.save();
+
           return true;
-        }
-        catch(e){
-          console.log("Error is");
-          console.log(e);
+        } catch (e) {
           return false;
         }
-        
       }
     },
   },

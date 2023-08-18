@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import User from "@/models/User";
 import connect from "@/config/database";
 
-connect();
+
 
 export async function POST(req){
   try{
@@ -18,6 +18,7 @@ export async function POST(req){
       })
     }
 
+    await connect();
     // check if user already exist
     const existingUser = await User.findOne({email: email});
     if(existingUser){
