@@ -1,4 +1,5 @@
 import User from "@/models/User";
+import { loginUser } from "@/utils/user/loginUser";
 import { connect } from "mongoose";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -16,21 +17,8 @@ export const authOptions = {
       if (account.provider === "google") {
         const { name, email, image } = user;
 
-        try {
-          await connect();
-          const user = await User.findOne({ email: email });
-          
-          if (!user) {
-            return false;
-          }
-
-          user.avatar = image;
-          await user.save();
-
-          return true;
-        } catch (e) {
-          return false;
-        }
+        const res = loginUser({email, image});
+        return res;
       }
     },
   },
