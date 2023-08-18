@@ -19,7 +19,7 @@ export const authOptions = {
         try {
           await connect();
           const user = await User.findOne({ email: email });
-
+          
           if (!user) {
             return false;
           }
