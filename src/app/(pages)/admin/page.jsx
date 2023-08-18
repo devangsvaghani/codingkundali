@@ -13,8 +13,8 @@ import DeleteUserForm from "@/components/UserForms/DeleteUserForm";
 const Admin = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session || session.email !== process.env.ADMIN_EMAIL) {
-    redirect("/login");
+  if (!session || session.user.email !== process.env.ADMIN_EMAIL) {
+    redirect("/");
   }
 
   return (

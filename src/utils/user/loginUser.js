@@ -1,5 +1,6 @@
 import connect from "@/config/database";
-import User from "@/models/User";import { cookies } from "next/headers";
+import User from "@/models/User";
+import { cookies } from "next/headers";
 
 
 export const loginUser = async ({email, image}) => {
