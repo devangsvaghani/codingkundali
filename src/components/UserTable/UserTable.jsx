@@ -1,3 +1,4 @@
+import {cookies} from "next/headers";
 import {
   Table,
   TableBody,
@@ -6,15 +7,26 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import UserRow from "./UserRow";
-import { fetchUsers } from "@/utils/user/fetchUsers";
-import axios from "axios";
+import User from "@/models/User";
+import connect from "@/config/database";
+
+const fetchUsers = async () => {
+  try{
+    await connect();
+    const users = await User.find({}).select("name year leetcode");
+    return users;
+  }
+  catch(e){
+    return null;
+  }
+}
 
 const UserTable = async () => {
-  // const array = await fetchUsers();
+  // cookies for just dynamic rendering
+  const cookieStore = cookies();
+  const theme = cookieStore.get("theme");
 
-  const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/user/fetchUsers`);
-
-  const array = res.data.users;
+  const array = await fetchUsers();
   
   return (
     <div className="w-full mt-5 flex flex-col justify-center">
