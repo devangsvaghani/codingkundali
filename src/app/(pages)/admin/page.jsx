@@ -13,9 +13,9 @@ import DeleteUserForm from "@/components/UserForms/DeleteUserForm";
 const Admin = async () => {
   const session = await getServerSession(authOptions);
 
-  // if (!session || session.email !== process.env.ADMIN_EMAIL) {
-  //   redirect("/login");
-  // }
+  if (!session || session.email !== process.env.ADMIN_EMAIL) {
+    redirect("/login");
+  }
 
   return (
     <div className="w-full mt-5 flex flex-col items-center">
