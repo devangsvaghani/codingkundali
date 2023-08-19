@@ -139,10 +139,10 @@ const CreateUserForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="first">First</SelectItem>
-                    <SelectItem value="second">Second</SelectItem>
-                    <SelectItem value="third">Third</SelectItem>
-                    <SelectItem value="fourth">Fourth</SelectItem>
+                    <SelectItem value="First">First</SelectItem>
+                    <SelectItem value="Second">Second</SelectItem>
+                    <SelectItem value="Third">Third</SelectItem>
+                    <SelectItem value="Fourth">Fourth</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

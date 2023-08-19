@@ -27,7 +27,8 @@ import { SiCodingninjas, SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 
 const createPlatforms = ({leetcodeData, codingninjasData, gfgData}) => {
 
-  let codingNinjasCountAll = codingninjasData.Easy + codingninjasData.Medium + codingninjasData.Hard;
+  
+  let codingNinjasCountAll = (codingninjasData.Easy || 0) + (codingninjasData.Medium || 0) + (codingninjasData.Hard || 0);
 
   let array = [
     {
@@ -40,15 +41,15 @@ const createPlatforms = ({leetcodeData, codingninjasData, gfgData}) => {
         },
         {
           "level" : "Easy",
-          "count" : codingninjasData.Easy,
+          "count" : codingninjasData.Easy || 0,
         },
         {
           "level" : "Medium",
-          "count" : codingninjasData.Medium,
+          "count" : codingninjasData.Medium || 0,
         },
         {
           "level" : "Hard",
-          "count" : codingninjasData.Hard,
+          "count" : codingninjasData.Hard || 0,
         },
       ]
     },

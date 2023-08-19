@@ -61,9 +61,8 @@ const FullCard = async ({ username }) => {
   const theme = cookieStore.get("theme")
 
   const user = await fetchUserf(username);
-
+  
   const { name, email, avatar, year, leetcode, codingninjas, geeksforgeeks } = user;
-
   const data = await fetchData({ leetcode, codingninjas, geeksforgeeks });
 
   const array = createPlatforms(data);
@@ -78,7 +77,7 @@ const FullCard = async ({ username }) => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="felx flex-col gap-3">
-              <CardTitle>{name}</CardTitle>
+              <CardTitle>{user.name}</CardTitle>
               <CardDescription>{`${year} Year`}</CardDescription>
             </div>
           </div>
