@@ -13,7 +13,7 @@ import connect from "@/config/database";
 const fetchUsers = async () => {
   try{
     await connect();
-    const users = await User.find({}).select("name year leetcode");
+    const users = await User.find({}, null, {sort: {name: 1}}).select("name year leetcode");
     return users;
   }
   catch(e){

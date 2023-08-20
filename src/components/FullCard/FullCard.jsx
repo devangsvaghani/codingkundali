@@ -77,7 +77,7 @@ const FullCard = async ({ username }) => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="felx flex-col gap-3">
-              <CardTitle>{user.name}</CardTitle>
+              <CardTitle>{name}</CardTitle>
               <CardDescription>{`${year} Year`}</CardDescription>
             </div>
           </div>
