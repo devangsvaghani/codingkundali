@@ -83,27 +83,27 @@ const createPlatforms = ({leetcodeData, codingninjasData, gfgData}) => {
       "problems" : [
         {
           "level" : "All",
-          "count" : gfgData.totalProblemsSolved,
+          "count" : gfgData.totalProblemsSolved || 0,
         },
         {
           "level" : "School",
-          "count" : gfgData.School,
+          "count" : gfgData.School || 0,
         },
         {
           "level" : "Basic",
-          "count" : gfgData.Basic,
+          "count" : gfgData.Basic || 0,
         },
         {
           "level" : "Easy",
-          "count" : gfgData.Easy,
+          "count" : gfgData.Easy || 0,
         },
         {
           "level" : "Medium",
-          "count" : gfgData.Medium,
+          "count" : gfgData.Medium || 0,
         },
         {
           "level" : "Hard",
-          "count" : gfgData.Hard,
+          "count" : gfgData.Hard || 0,
         },
       ]
     },
